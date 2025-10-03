@@ -7,12 +7,8 @@
     background-color: #6c464e;
 } */
 
-html {
-    background-color: #FFFCD9;
-}
 
 nav {
-    background-color:  #8a897c;
     display: flex;
 }
 
@@ -22,9 +18,42 @@ ul {
 
 li a{
     text-decoration: none;
-    color: white;
+    color: black;
 }
 
 .logo {
+    width: 250px;
+    border: none;
+}
+
+.hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-gap: 2%;
+}
+
+.hero img{
+    width: 600px;
+    grid-column: 2;
+    margin: 0;
+    
+}
+
+.info {
+    grid-column: 1;
+}
+
+.container img {
     width: 200px;
+    border-style: solid;
+    border-color:#104547;
+    border-radius: 5%;
+}
+
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
 }
