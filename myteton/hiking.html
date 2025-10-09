@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>MyNationalParks</title>
+
+<style>
+     main {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .gros {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .option {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      gap: 2rem;
+    }
+
+    .option div {
+      background-color: white;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      width: 200px;
+      height: 150px;
+      align-items: center;
+      text-align: center;
+    }
+
+
+    h2 {
+      position: absolute;
+      top: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      color: black;
+    }
+</style>
+
+
+
+</head>
+<body>
+  <header></header>
+  <nav>
+    <ul>
+        <li>
+            <a href="teton.html">MyTetons</a>
+        </li>
+        <li>
+            <a href="map.html">Park Map</a>
+        </li>
+        <li>
+            <a href="hunt.html">Scavenger Hunt</a>
+        </li>
+        <li>
+            <a href="reservations.html">Reservations</a>
+        </li>
+        <li>
+            <a href="blog.html">Park Blogs</a>
+        </li>
+        <li>
+            <a href="memories.html">Memories</a>
+        </li>
+    </ul>
+  </nav>
+  <main>
+    <h2>Choose your Hiking Adventure</h2>
+    <img class="gros" src="img/hiking.jpg">
+    <div class="option">
+        <div class="back">Backpacking</div>
+        <div class="day">Day Hiking</div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 MyNationalParks</p>
+  </footer>
+
+</body>
+</html>
