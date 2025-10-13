@@ -19,9 +19,11 @@ body {
 
 header {
   background-color: white;
-  height: 45px;
+  height: 55px;
   padding: 0px;
   margin: 0px;
+  display: flex;
+  justify-content: center;
 }
 
 
@@ -57,10 +59,8 @@ li a {
 }
 
 .logo {
-  width: 250px;
+  width: 300px;
   border: none;
-  display: flex;
-  width: auto 0;
 }
 
 
@@ -126,6 +126,13 @@ li a {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+h2 {
+  background-color:white;
+  width: 500px;
+  text-align: center;
+  height: 50px;
 }
 
 footer {
