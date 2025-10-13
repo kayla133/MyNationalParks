@@ -128,11 +128,24 @@ li a {
   justify-content: center;
 }
 
+
+.teton-map {
+  max-width: 600px;
+    display: block;
+    margin: 0 auto;
+    border: solid;
+    border-color: #3e5e3c;
+}
+
 h2 {
   background-color:white;
   width: 500px;
   text-align: center;
-  height: 50px;
+  height: 10px;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  margin-bottom: 10px;
 }
 
 footer {
