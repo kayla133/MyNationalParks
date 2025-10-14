@@ -50,7 +50,7 @@ li {
   text-align: center;
 }
 
-li a {
+a {
   text-decoration: none;
   color: #3e5e3c;
   display: block;
@@ -131,21 +131,23 @@ li a {
 
 .teton-map {
   max-width: 600px;
-    display: block;
-    margin: 0 auto;
-    border: solid;
-    border-color: #3e5e3c;
+  display: block;
+  margin: 0 auto;
+  border: solid;
+  border-color: #3e5e3c;
+  margin-top: 20px;
 }
 
 h2 {
   background-color:white;
   width: 500px;
-  text-align: center;
-  height: 10px;
-  align-items: center;
-  justify-content: center;
+  height: 50px;
+  display: block;
   margin: 0 auto;
-  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 footer {
