@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>MyNationalParks</title>
+
+  <style>
+    .dayhike {
+      padding: 2%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 1rem;
+      place-items: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .dayhike p {
+      text-decoration: none;
+      color: #3e5e3c;
+      font-size: 20px;
+      text-align: center;
+    }
+
+    .death, .jenny, .rock, .granite {
+      width: 300px;
+      height: 200px;
+      background-color: white;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <img class="logo" src="img/flogo.PNG" alt="image of logo">
+  </header>
+  <nav>
+    <ul>
+      <li>
+        <a href="teton.html">MyTetons</a>
+      </li>
+      <li>
+        <a href="map.html">Park Map</a>
+      </li>
+      <li>
+        <a href="backpacking.html">Backpacking</a>
+      </li>
+      <li>
+        <a href="hunt.html">Scavenger Hunt</a>
+      </li>
+      <li>
+        <a href="reservations.html">Reservations</a>
+      </li>
+      <li>
+        <a href="blog.html">Park Blogs</a>
+      </li>
+      <li>
+        <a href="memories.html">Memories</a>
+      </li>
+    </ul>
+  </nav>
+  <main>
+    <section class="daymap">
+      <h2>Top 5 Day Hikes</h2>
+      <div class="dayhike">
+        <div class="death">
+          <p>Death Canyon Trailhead</p>
+        </div>
+        <div class="jenny">
+          <p>Jenny Lake Trailhead</p>
+        </div>
+        <div class="rock">
+          <p>Laurance S. Rockefeller Preserve Trailhead</p>
+        </div>
+        <div class="granite">
+          <p>Granite Canyon Trailhead</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 MyNationalParks</p>
+  </footer>
+
+</body>
+
+</html>
