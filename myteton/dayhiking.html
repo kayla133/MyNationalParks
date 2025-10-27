@@ -8,11 +8,29 @@
   <title>MyNationalParks</title>
 
   <style>
-    .dayhike {
+    main {
+      background-color: #adab91;
+      padding: 5%;
+      margin: 3%;
+      border-radius: 15px;
+    }
+
+    .dayhikeTop {
       padding: 2%;
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: 1fr;
+      gap: 1rem;
+      place-items: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .bottom {
+      padding: 2%;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-template-rows: 1fr;
       gap: 1rem;
       place-items: center;
       max-width: 900px;
@@ -26,7 +44,19 @@
       text-align: center;
     }
 
-    .death, .jenny, .rock, .granite {
+     a {
+      text-decoration: none;
+      color: #3e5e3c;
+      display: block;
+      padding: 1rem 0;
+      font-size: 20px;
+    }
+
+    .death,
+    .jenny,
+    .insp,
+    .rock,
+    .granite {
       width: 300px;
       height: 200px;
       background-color: white;
@@ -34,6 +64,34 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      text-align: center;
+    }
+
+    .link a {
+      background-color: #575b67;
+      color: white;
+      width: 300px;
+      height: 50px;
+      display: block;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      border-radius: 15px;
+    }
+
+    h2 {
+      background-color: #575b67;
+      color: white;
+      width: 500px;
+      height: 50px;
+      display: block;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     }
   </style>
 </head>
@@ -49,9 +107,6 @@
       </li>
       <li>
         <a href="map.html">Park Map</a>
-      </li>
-      <li>
-        <a href="backpacking.html">Backpacking</a>
       </li>
       <li>
         <a href="hunt.html">Scavenger Hunt</a>
@@ -70,21 +125,31 @@
   <main>
     <section class="daymap">
       <h2>Top 5 Day Hikes</h2>
-      <div class="dayhike">
+      <div class="dayhikeTop">
         <div class="death">
-          <p>Death Canyon Trailhead</p>
+          <a href="dayhikes/death.html">Death Canyon Trailhead</a>
+        </div>
+        <div class="insp">
+          <a href="inst.html">Inspiration's Point</a>
         </div>
         <div class="jenny">
-          <p>Jenny Lake Trailhead</p>
+          <a href="dayhikes/jenny.html">Jenny Lake Trailhead</a>
         </div>
+      </div>
+      <div class="bottom">
+        <div></div>
         <div class="rock">
-          <p>Laurance S. Rockefeller Preserve Trailhead</p>
+          <a href="dayhikes/rock.html">Laurance S. Rockefeller Preserve Trailhead</a>
         </div>
         <div class="granite">
-          <p>Granite Canyon Trailhead</p>
+          <a href="dayhikes/granite.html">Granite Canyon Trailhead</a>
         </div>
       </div>
     </section>
+    <div class="link">
+      <a href="backpacking.html">Backpacking</a>
+    </div>
+
   </main>
 
   <footer>
