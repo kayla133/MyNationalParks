@@ -73,7 +73,7 @@ section {
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr;
   gap: 1rem;
-  align-items: center;
+  /* align-items: center; */
   max-width: 900px;
   margin: 0 auto;
   justify-content: center;
