@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animal Spotting</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        #map-container {
+            position: relative;
+            width: 800px;
+            margin: 0 auto;
+        }
+
+        #park-map {
+            width: 100%;
+            cursor: crosshair;
+        }
+
+        .animal-icon {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <img class="logo" src="img/flogo.PNG" alt="image of logo">
+    </header>
+    <nav>
+        <ul>
+            <li>
+                <a href="alaska.html">Alaska</a>
+            </li>
+            <li>
+                <a href="cali.html">California</a>
+            </li>
+            <li>
+                <a href="utah.html">Utah</a>
+            </li>
+            <li>
+                <a href="wyom.html">Wyoming</a>
+            </li>
+        </ul>
+    </nav>
+    <div id="map-container">
+        <img id="park-map" src="maps/teton.jpg" alt="National Park Map">
+    </div>
+    <div id="entry-form" class="hidden">
+  <label for="category">Choose Category:</label>
+  <select id="category">
+    <option value="">-- Select Category --</option>
+    <option value="mammals">Mammals</option>
+    <option value="birds">Birds</option>
+    <option value="reptiles">Reptiles</option>
+    <option value="fish">Fish</option>
+  </select>
+
+  <label for="animal">Choose Animal:</label>
+  <select id="animal">
+    <option value="">-- Select Animal --</option>
+  </select>
+
+  <label>Upload a photo:</label>
+  <input type="file" id="photo-input">
+
+  <label>Notes:</label>
+  <textarea id="notes" placeholder="Write about your sighting..."></textarea>
+
+  <button id="save-entry">Save</button>
+</div>
+
+<script src="script.js"></script>
+</body>
+
+</html>
