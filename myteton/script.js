@@ -6,7 +6,7 @@ const categorySelect = document.getElementById('category');
 const animalSelect = document.getElementById('animal');
 const photoInput = document.getElementById('photo-input');
 const notesInput = document.getElementById('notes');
-const locationInput = documnet.getElementById('location');
+const locationInput = document.getElementById('location');
 const clearButton = document.getElementById('clear-entries');
 
 let clickX, clickY;
@@ -145,18 +145,24 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// ❌ Close form if click outside
-document.addEventListener('click', (e) => {
-  if (!entryForm.contains(e.target) && !map.contains(e.target) && entryForm.classList.contains('visible')) {
+
+// ❌ Close form or popup if click outside
+document.addEventListener('click', e => {
+  const popup = document.querySelector('.sighting-popup');
+
+  // Close popup if click outside
+  if (popup && !popup.contains(e.target)) {
+    popup.remove();
+  }
+
+  // Close entry form if click outside
+  if (entryForm.classList.contains('visible') && !entryForm.contains(e.target) && !map.contains(e.target)) {
     entryForm.classList.remove('visible');
     entryForm.classList.add('hidden');
     clearForm();
   }
-
-  // Close popup if click outside
-  const popup = document.querySelector('.sighting-popup');
-  if (popup && !popup.contains(e.target)) popup.remove();
 });
+
 
 // 🧹 Clear all entries
 clearButton.addEventListener('click', () => {
