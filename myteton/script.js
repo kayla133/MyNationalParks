@@ -176,3 +176,48 @@ document.getElementById('clear-entries').addEventListener('click', () => {
   }
 });
 
+function addAnimalIcon(x, y, animal, notes, photo) {
+  const icon = document.createElement('img');
+  icon.src = 'icons/pin.png'; // same icon for all entries
+  icon.className = 'animal-icon';
+  icon.style.left = `${x}%`;
+  icon.style.top = `${y}%`;
+
+  // Store info in data attributes
+  icon.dataset.animal = animal;
+  icon.dataset.notes = notes || 'No notes';
+  icon.dataset.photo = photo || 'No photo';
+
+  // Add click listener to show info popup
+  icon.addEventListener('click', (e) => {
+    e.stopPropagation(); // prevent triggering map click
+    showSightingPopup(icon.dataset.animal, icon.dataset.notes, icon.dataset.photo);
+  });
+
+  document.getElementById('map-container').appendChild(icon);
+}
+
+// Simple popup to show sighting info
+function showSightingPopup(animal, notes, photo) {
+  const popup = document.createElement('div');
+  popup.className = 'sighting-popup';
+  popup.innerHTML = `
+    <strong>Animal:</strong> ${animal}<br>
+    <strong>Notes:</strong> ${notes}<br>
+    <strong>Photo:</strong> ${photo}
+    <button id="close-popup">Close</button>
+  `;
+
+  document.body.appendChild(popup);
+
+  // Close button functionality
+  document.getElementById('close-popup').addEventListener('click', () => {
+    popup.remove();
+  });
+}
+document.addEventListener('click', (e) => {
+  const popup = document.querySelector('.sighting-popup');
+  if (popup && !popup.contains(e.target)) {
+    popup.remove();
+  }
+});
