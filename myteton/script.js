@@ -6,6 +6,7 @@ const categorySelect = document.getElementById('category');
 const animalSelect = document.getElementById('animal');
 const photoInput = document.getElementById('photo-input');
 const notesInput = document.getElementById('notes');
+const clearButton = document.getElementById('clear-entries');
 
 let clickX, clickY;
 
@@ -36,53 +37,21 @@ const animalsByCategory = {
 };
 
 // 💾 Local Storage Helpers
-function saveSightings(sightings) {
-  localStorage.setItem('sightings', JSON.stringify(sightings));
+const saveSightings = (sightings) => localStorage.setItem('sightings', JSON.stringify(sightings));
+const loadSightings = () => JSON.parse(localStorage.getItem('sightings')) || [];
+
+// 🧹 Clear Form
+function clearForm() {
+  categorySelect.value = '';
+  animalSelect.innerHTML = '<option value="">-- Select Animal --</option>';
+  photoInput.value = '';
+  notesInput.value = '';
 }
-
-function loadSightings() {
-  return JSON.parse(localStorage.getItem('sightings')) || [];
-}
-
-// 📍 Add map pin (with tooltip)
-function addMapPin(x, y, animals, notes) {
-  const pin = document.createElement('img');
-  pin.src = 'img/pin.png'; // Universal icon
-  pin.className = 'map-pin';
-  pin.style.left = `${x}%`;
-  pin.style.top = `${y}%`;
-
-  // Tooltip container
-  const tooltip = document.createElement('div');
-  tooltip.className = 'tooltip';
-  tooltip.innerHTML = `
-    <strong>${animals.join(', ')}</strong><br>
-    ${notes ? notes : '<em>No notes added</em>'}
-  `;
-  pin.appendChild(tooltip);
-
-  // Show tooltip on hover
-  pin.addEventListener('mouseenter', () => tooltip.classList.add('visible'));
-  pin.addEventListener('mouseleave', () => tooltip.classList.remove('visible'));
-
-  mapContainer.appendChild(pin);
-}
-
-// 📍 Map click → show form
-map.addEventListener('click', (e) => {
-  const rect = map.getBoundingClientRect();
-  clickX = ((e.clientX - rect.left) / rect.width) * 100;
-  clickY = ((e.clientY - rect.top) / rect.height) * 100;
-
-  entryForm.classList.remove('hidden');
-  entryForm.classList.add('visible');
-});
 
 // 🧩 Populate animal dropdown
 categorySelect.addEventListener('change', () => {
   const category = categorySelect.value;
   animalSelect.innerHTML = '<option value="">-- Select Animal --</option>';
-
   if (category && animalsByCategory[category]) {
     animalsByCategory[category].forEach(animal => {
       const option = document.createElement('option');
@@ -93,19 +62,60 @@ categorySelect.addEventListener('change', () => {
   }
 });
 
-// 🧹 Clear the form
-function clearForm() {
-  categorySelect.value = '';
-  animalSelect.innerHTML = '<option value="">-- Select Animal --</option>';
-  photoInput.value = '';
-  notesInput.value = '';
+// 📍 Map click → show form
+map.addEventListener('click', (e) => {
+  const rect = map.getBoundingClientRect();
+  clickX = ((e.clientX - rect.left) / rect.width) * 100;
+  clickY = ((e.clientY - rect.top) / rect.height) * 100;
+  entryForm.classList.remove('hidden');
+  entryForm.classList.add('visible');
+});
+
+// 💾 Add a pin with popup
+function addAnimalPin(x, y, animals, notes, photoFile) {
+  const icon = document.createElement('img');
+  icon.src = 'img/pin.png'; // same icon for all entries
+  icon.className = 'animal-icon';
+  icon.style.left = `${x}%`;
+  icon.style.top = `${y}%`;
+
+  icon.dataset.animal = animals.join(', ');
+  icon.dataset.notes = notes || 'No notes';
+  icon.dataset.photo = photoFile ? URL.createObjectURL(photoFile) : null;
+
+  icon.addEventListener('click', (e) => {
+    e.stopPropagation(); // prevent map click
+
+    // Remove existing popup
+    const existing = document.querySelector('.sighting-popup');
+    if (existing) existing.remove();
+
+    const popup = document.createElement('div');
+    popup.className = 'sighting-popup';
+
+    let photoHTML = icon.dataset.photo ? `<img src="${icon.dataset.photo}" alt="Photo" style="max-width:150px; display:block; margin-top:5px;">` : '';
+
+    popup.innerHTML = `
+      <strong>Animal:</strong> ${icon.dataset.animal}<br>
+      <strong>Notes:</strong> ${icon.dataset.notes}<br>
+      ${photoHTML}
+      <button class="close-popup">Close</button>
+    `;
+
+    document.body.appendChild(popup);
+
+    // Close button
+    popup.querySelector('.close-popup').addEventListener('click', () => popup.remove());
+  });
+
+  mapContainer.appendChild(icon);
 }
 
 // 💾 Save new entry
 document.getElementById('save-entry').addEventListener('click', () => {
   const animal = animalSelect.value;
   const notes = notesInput.value;
-  const photo = photoInput.files[0] ? photoInput.files[0].name : null;
+  const photoFile = photoInput.files[0] || null;
 
   if (!animal) {
     alert('Please choose an animal.');
@@ -113,13 +123,13 @@ document.getElementById('save-entry').addEventListener('click', () => {
   }
 
   const sightings = loadSightings();
-  const newSighting = { x: clickX, y: clickY, animals: [animal], notes, photo };
-
+  const newSighting = { x: clickX, y: clickY, animals: [animal], notes, photoFileName: photoFile ? photoFile.name : null };
   sightings.push(newSighting);
   saveSightings(sightings);
-  addMapPin(clickX, clickY, [animal], notes);
 
-  // Hide form with fade-out
+  addAnimalPin(clickX, clickY, [animal], notes, photoFile);
+
+  // Hide & reset form
   entryForm.classList.remove('visible');
   entryForm.classList.add('hidden');
   clearForm();
@@ -128,96 +138,30 @@ document.getElementById('save-entry').addEventListener('click', () => {
 // 🚀 Load existing pins
 window.addEventListener('DOMContentLoaded', () => {
   const sightings = loadSightings();
-  sightings.forEach(s => addMapPin(s.x, s.y, s.animals, s.notes));
+  sightings.forEach(s => {
+    addAnimalPin(s.x, s.y, s.animals, s.notes, null); // photo not persisted yet
+  });
 });
 
-// ❌ Click outside form → close it
+// ❌ Close form if click outside
 document.addEventListener('click', (e) => {
-  const isClickInsideForm = entryForm.contains(e.target);
-  const isClickOnMap = map.contains(e.target);
-
-  if (!isClickInsideForm && !isClickOnMap && entryForm.classList.contains('visible')) {
+  if (!entryForm.contains(e.target) && !map.contains(e.target) && entryForm.classList.contains('visible')) {
     entryForm.classList.remove('visible');
     entryForm.classList.add('hidden');
     clearForm();
   }
-});
 
-document.getElementById('clear-entries').addEventListener('click', () => {
-  // Confirm with the user before deleting
-  if (confirm('Are you sure you want to clear all entries?')) {
-    // Clear saved data
-    localStorage.removeItem('sightings');
-
-    // Remove all pins from the map
-    const icons = document.querySelectorAll('.animal-icon');
-    icons.forEach(icon => icon.remove());
-
-    alert('All entries have been cleared!');
-  }
-});
-document.getElementById('clear-entries').addEventListener('click', () => {
-  if (confirm('Are you sure you want to clear all entries?')) {
-    // 1. Remove all saved sightings
-    localStorage.removeItem('sightings');
-
-    // 2. Remove all pins/icons from the map
-    document.querySelectorAll('.animal-icon').forEach(icon => icon.remove());
-
-    // 3. Reset and hide the form (if it exists)
-    const form = document.getElementById('animal-form');
-    if (form) {
-      form.reset();
-      form.style.display = 'none';
-    }
-
-    // 4. Alert confirmation
-    alert('All entries have been cleared!');
-  }
-});
-
-function addAnimalIcon(x, y, animal, notes, photo) {
-  const icon = document.createElement('img');
-  icon.src = 'icons/pin.png'; // same icon for all entries
-  icon.className = 'animal-icon';
-  icon.style.left = `${x}%`;
-  icon.style.top = `${y}%`;
-
-  // Store info in data attributes
-  icon.dataset.animal = animal;
-  icon.dataset.notes = notes || 'No notes';
-  icon.dataset.photo = photo || 'No photo';
-
-  // Add click listener to show info popup
-  icon.addEventListener('click', (e) => {
-    e.stopPropagation(); // prevent triggering map click
-    showSightingPopup(icon.dataset.animal, icon.dataset.notes, icon.dataset.photo);
-  });
-
-  document.getElementById('map-container').appendChild(icon);
-}
-
-// Simple popup to show sighting info
-function showSightingPopup(animal, notes, photo) {
-  const popup = document.createElement('div');
-  popup.className = 'sighting-popup';
-  popup.innerHTML = `
-    <strong>Animal:</strong> ${animal}<br>
-    <strong>Notes:</strong> ${notes}<br>
-    <strong>Photo:</strong> ${photo}
-    <button id="close-popup">Close</button>
-  `;
-
-  document.body.appendChild(popup);
-
-  // Close button functionality
-  document.getElementById('close-popup').addEventListener('click', () => {
-    popup.remove();
-  });
-}
-document.addEventListener('click', (e) => {
+  // Close popup if click outside
   const popup = document.querySelector('.sighting-popup');
-  if (popup && !popup.contains(e.target)) {
-    popup.remove();
+  if (popup && !popup.contains(e.target)) popup.remove();
+});
+
+// 🧹 Clear all entries
+clearButton.addEventListener('click', () => {
+  if (confirm('Are you sure you want to clear all entries?')) {
+    localStorage.removeItem('sightings');
+    document.querySelectorAll('.animal-icon').forEach(icon => icon.remove());
+    clearForm();
+    alert('All entries cleared!');
   }
 });
