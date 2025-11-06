@@ -6,6 +6,7 @@ const categorySelect = document.getElementById('category');
 const animalSelect = document.getElementById('animal');
 const photoInput = document.getElementById('photo-input');
 const notesInput = document.getElementById('notes');
+const locationInput = documnet.getElementById('location');
 const clearButton = document.getElementById('clear-entries');
 
 let clickX, clickY;
@@ -42,6 +43,7 @@ const loadSightings = () => JSON.parse(localStorage.getItem('sightings')) || [];
 
 // 🧹 Clear Form
 function clearForm() {
+  locationInput.value = '';
   categorySelect.value = '';
   animalSelect.innerHTML = '<option value="">-- Select Animal --</option>';
   photoInput.value = '';
