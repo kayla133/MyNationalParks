@@ -11,7 +11,7 @@ const clearButton = document.getElementById('clear-entries');
 
 let clickX, clickY;
 
-// 🦓 Animal Data by Category
+
 const animalsByCategory = {
   mammals: [
     'Badgers', 'Beaver', 'Bison', 'Black Bear', 'Chipmunks', 'Elk',
@@ -37,7 +37,7 @@ const animalsByCategory = {
   ]
 };
 
-// 💾 Local Storage Helpers
+
 const saveSightings = (sightings) => localStorage.setItem('sightings', JSON.stringify(sightings));
 const loadSightings = () => JSON.parse(localStorage.getItem('sightings')) || [];
 
@@ -50,7 +50,7 @@ function clearForm() {
   notesInput.value = '';
 }
 
-// 🧩 Populate animal dropdown
+
 categorySelect.addEventListener('change', () => {
   const category = categorySelect.value;
   animalSelect.innerHTML = '<option value="">-- Select Animal --</option>';
@@ -64,7 +64,7 @@ categorySelect.addEventListener('change', () => {
   }
 });
 
-// 📍 Map click → show form
+
 map.addEventListener('click', (e) => {
   const rect = map.getBoundingClientRect();
   clickX = ((e.clientX - rect.left) / rect.width) * 100;
@@ -73,7 +73,7 @@ map.addEventListener('click', (e) => {
   entryForm.classList.add('visible');
 });
 
-// 💾 Add a pin with popup
+
 function addAnimalPin(x, y, animals, notes, photoFile) {
   const icon = document.createElement('img');
   icon.src = 'img/pin.png'; // same icon for all entries
@@ -113,7 +113,7 @@ function addAnimalPin(x, y, animals, notes, photoFile) {
   mapContainer.appendChild(icon);
 }
 
-// 💾 Save new entry
+
 document.getElementById('save-entry').addEventListener('click', () => {
   const animal = animalSelect.value;
   const notes = notesInput.value;
@@ -137,7 +137,7 @@ document.getElementById('save-entry').addEventListener('click', () => {
   clearForm();
 });
 
-// 🚀 Load existing pins
+
 window.addEventListener('DOMContentLoaded', () => {
   const sightings = loadSightings();
   sightings.forEach(s => {
@@ -146,7 +146,7 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// ❌ Close form or popup if click outside
+
 document.addEventListener('click', e => {
   const popup = document.querySelector('.sighting-popup');
 
@@ -164,7 +164,7 @@ document.addEventListener('click', e => {
 });
 
 
-// 🧹 Clear all entries
+
 clearButton.addEventListener('click', () => {
   if (confirm('Are you sure you want to clear all entries?')) {
     localStorage.removeItem('sightings');

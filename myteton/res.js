@@ -1,28 +1,46 @@
-// res.js
+let selectedBox = null;
 
-// Get reference to the select element
-const siteSelect = document.getElementById('camp-site');
+const boxes = document.querySelectorAll(".box");
+const modal = document.getElementById("reservationModal");
+const closeModal = document.getElementById("closeModal");
+const form = document.getElementById("reservationForm");
 
-// List of available campsites
-const campingSites = [
-  'Gros Ventre Campground',
-  'Jenny Lake Campground',
-  'Signal Mountain Campground',
-  'Colter Bay Campground',
-  'Colter Bay Tent Village',
-  'Lizard Creek Campground',
-  'Headwaters Campground'
-];
-
-// Populate the dropdown
-campingSites.forEach(site => {
-  const option = document.createElement('option');
-  option.value = site;
-  option.textContent = site;
-  siteSelect.appendChild(option);
+// Open modal when user clicks a box
+boxes.forEach(box => {
+    box.addEventListener("click", () => {
+        selectedBox = box;
+        modal.style.display = "block";
+    });
 });
 
-// Optional: Handle user selection
-siteSelect.addEventListener('change', () => {
-  const selectedSite = siteSelect.value;
+// Close modal
+closeModal.addEventListener("click", () => {
+    modal.style.display = "none";
+});
+
+// Save form info to the clicked box
+form.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    let name = document.getElementById("name").value;
+    let start = document.getElementById("startDate").value;
+    let end = document.getElementById("endDate").value;
+
+    selectedBox.innerHTML = `
+        <strong>${name}</strong><br>
+        ${start} → ${end}
+    `;
+
+    // Close modal
+    modal.style.display = "none";
+
+    // Clear form
+    form.reset();
+});
+
+// Close modal if clicking outside modal content
+window.addEventListener("click", (e) => {
+    if (e.target === modal) {
+        modal.style.display = "none";
+    }
 });
