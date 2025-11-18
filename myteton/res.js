@@ -5,6 +5,15 @@ const modal = document.getElementById("reservationModal");
 const closeModal = document.getElementById("closeModal");
 const form = document.getElementById("reservationForm");
 
+const toggle = document.querySelector('.menu-toggle');
+const navLinks = document.querySelector('.nav-links');
+
+toggle.addEventListener('click', () => {
+  navLinks.classList.toggle('active');
+});
+
+
+
 // Open modal when user clicks a box
 boxes.forEach(box => {
     box.addEventListener("click", () => {

@@ -9,6 +9,14 @@ const notesInput = document.getElementById('notes');
 const locationInput = document.getElementById('location');
 const clearButton = document.getElementById('clear-entries');
 
+const toggle = document.querySelector('.menu-toggle');
+const navLinks = document.querySelector('.nav-links');
+
+toggle.addEventListener('click', () => {
+  navLinks.classList.toggle('active');
+});
+
+
 let clickX, clickY;
 
 
