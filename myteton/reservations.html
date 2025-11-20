@@ -90,9 +90,24 @@
             border-radius: 6px;
         }
 
-        button:hover {
-            background: #555;
+        #notes {
+            width: 100%;
+            /* full width of container */
+            height: 100px;
+            /* fixed height */
+            padding: 8px;
+            /* spacing inside */
+            font-size: 14px;
+            resize: vertical;
+            margin-bottom: 10px;
         }
+
+        #reservationForm {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
     </style>
 </head>
 
@@ -146,13 +161,30 @@
                 <label>Location:</label>
                 <input type="text" id="name" required>
 
+                <label for="type">Type:</label>
+                <select id="type">
+                    <option value="">-- Select Type --</option>
+                </select>
+
+                <br>
+
                 <label>Start Date:</label>
                 <input type="date" id="startDate" required>
 
                 <label>End Date:</label>
                 <input type="date" id="endDate" required>
 
-                <button type="submit">Save</button>
+                <br>
+
+
+                <label for="photo-input">Upload a photo:</label>
+                <input type="file" id="photo-input">
+
+                <label for="notes">Notes:</label>
+                <br>
+                <textarea id="notes" placeholder="Write information about your reservation..."></textarea>
+
+                <button type="submit">Save Reservation</button>
             </form>
         </div>
     </div>
@@ -162,6 +194,7 @@
     </footer>
 
     <script src="res.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>
