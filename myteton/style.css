@@ -191,8 +191,12 @@ footer {
 
 /* 1200px */
 @media (max-width: 1200px) {
-  .grid {
+  .grid, .dayhikeTop, .bottom  {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+ .dayhikeTop, .bottom  {
+    grid-template-columns: repeat(1, 1fr);
   }
 
   .hero {
@@ -222,6 +226,10 @@ footer {
     position: relative;
     /* dropdown will be positioned inside this */
     padding: 0 1rem;
+  }
+
+  .grid, .dayhikeTop, .bottom {
+    grid-template-columns: repeat(1, 1fr);
   }
 
   /* ensure the desktop flex rules don't grow the menu or push the button */
