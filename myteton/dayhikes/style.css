@@ -7,6 +7,24 @@ body {
   padding: 0;
 }
 
+.rockMain {
+  height: 400px;
+}
+
+.rockSection {
+  color: #3e5e3c;
+  padding: 2%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 1rem;
+  align-items: center;
+  max-width: 900px;
+  margin: 0 auto;
+  justify-content: center;
+  text-align: center;
+}
+
 header {
   background-color: white;
   height: 55px;
@@ -95,7 +113,7 @@ section {
   max-width: 900px;
   margin: 0 auto;
   justify-content: center;
-  text-align:center;
+  text-align: center;
 }
 
 section h3 {
@@ -106,7 +124,7 @@ section li {
   padding-bottom: 3%;
 }
 
-.info img{
+.info img {
   width: 350px;
   border-radius: 10px;
   margin-top: 10%;
@@ -135,18 +153,18 @@ main {
   padding: 5px;
 }
 
-div img{
+.images img {
   width: 350px;
   margin-top: 10%;
-  border-radius:10px;
+  border-radius: 10px;
 }
 
 footer {
   background-color: white;
   text-align: center;
   color: #3e5e3c;
-  padding-top:1%;
-  padding-bottom:1%;
+  padding-top: 1%;
+  padding-bottom: 1%;
 }
 
 
@@ -154,15 +172,36 @@ footer {
   .grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  section, .rockSection {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 0;
+    justify-items: center;
+    text-align: center;
+    justify-content: center;
+  }
+
+  main {
+    margin-top: 5%;
+  }
+
+  .images {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
 
 /* 1200px */
 @media (max-width: 1200px) {
-  .grid, .dayhikeTop, .bottom  {
+
+  .grid,
+  .dayhikeTop,
+  .bottom {
     grid-template-columns: repeat(2, 1fr);
   }
 
- .dayhikeTop, .bottom  {
+  .dayhikeTop,
+  .bottom {
     grid-template-columns: repeat(1, 1fr);
   }
 
@@ -195,7 +234,9 @@ footer {
     padding: 0 1rem;
   }
 
-  .grid, .dayhikeTop, .bottom {
+  .grid,
+  .dayhikeTop,
+  .bottom {
     grid-template-columns: repeat(1, 1fr);
   }
 

@@ -7,32 +7,15 @@
     <link rel="stylesheet" href="style.css">
     <title>MyNationalParks</title>
 </head>
-<style>
-    main {
-        height: 400px;
-    }
-
-    section {
-        color: #3e5e3c;
-        padding: 2%;
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        grid-template-rows: 1fr;
-        gap: 1rem;
-        align-items: center;
-        max-width: 900px;
-        margin: 0 auto;
-        justify-content: center;
-        text-align: center;
-    }
-</style>
-
 <body>
     <header>
         <img class="logo" src="flogo.PNG" alt="image of logo">
     </header>
-    <nav>
-        <ul>
+    <nav class="navbar">
+        <button class="menu-toggle" aria-label="Open navigation menu">
+            ☰
+        </button>
+        <ul class="nav-links">
             <li>
                 <a href="death.html">Death Canyon Trailhead</a>
             </li>
@@ -48,14 +31,14 @@
         </ul>
     </nav>
     <h2>Laurance S. Rockfeller Preserve Trailhead</h2>
-    <section>
+    <section class="rockSection">
         <div class="info">
             <!-- host any blogs and button to get to main hiking page -->
              <a href="https://www.nps.gov/places/000/laurance-s-rockefeller-preserve-trailhead.htm">More Info</a>
              <img src="imgs/rockthree.jpg" alt="photo of Phelps Lake">
              <a href="../dayhiking.html">Day Hikes</a>
         </div>
-        <main>
+        <main class = "rockMain">
             <h3>Lake Creek-Woodland Trail Loop</h3>
             <ul>
             <li>1.5 Hours</li>
@@ -79,7 +62,7 @@
             <li>Moderate</li>
             </ul>
         </main>
-        <div>
+        <div class="images">
             <img src="imgs/rocktwo.jpg" alt="photo of Phelps Lake">
             <img src="imgs/rockone.jpg" alt="photo of Death Canyon">
         </div>
@@ -87,6 +70,7 @@
     <footer>
         <p>&copy; 2025 MyNationalParks</p>
     </footer>
+    <script src="script.js"></script>
 
 </body>
 
